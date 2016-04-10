@@ -1,0 +1,47 @@
+{
+  "author": "Ilya Kaminsky <ilyakam@gmail.com> (http://ilyakam.com)",
+  "bugs": {
+    "url": "https://github.com/ilyakam/gulp-pug-linter/issues"
+  },
+  "description": "Gulp plugin to lint Pug (nee Jade) files",
+  "dependencies": {
+    "gulp-util": "^3.0.7",
+    "pug-lint": "^2.1.6",
+    "through2": "^2.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "gulp": "^3.9.1",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "mockery": "^1.4.1",
+    "sinon": "^1.17.3",
+    "standard": "^6.0.8"
+  },
+  "engines": {
+    "node": "5.*"
+  },
+  "homepage": "https://github.com/ilyakam/gulp-pug-linter#readme",
+  "keywords": [
+    "gulp",
+    "lint",
+    "pug",
+    "plugin",
+    "jade"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "gulp-pug-linter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilyakam/gulp-pug-linter.git"
+  },
+  "scripts": {
+    "coverage": "istanbul cover _mocha -- -R spec",
+    "coveralls": "npm run-script coverage && node ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info",
+    "pretest": "standard",
+    "test": "npm run-script coveralls"
+  },
+  "version": "0.1.0"
+}
