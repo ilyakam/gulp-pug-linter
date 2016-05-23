@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Allow use of `extend` in `pug-lint`
+
 ## [0.2.1] - 2016-05-03
 ### Fixed
 - Bump version
