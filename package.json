@@ -6,7 +6,7 @@
   "description": "Gulp plugin to lint Pug (nee Jade) files",
   "dependencies": {
     "gulp-util": "^3.0.7",
-    "pug-lint": "^2.1.6",
+    "pug-lint": "^2.2.2",
     "through2": "^2.0.1"
   },
   "devDependencies": {
@@ -14,9 +14,9 @@
     "coveralls": "^2.11.9",
     "gulp": "^3.9.1",
     "istanbul": "^0.4.2",
-    "mocha": "^2.4.5",
-    "mockery": "^1.4.1",
-    "sinon": "^1.17.3",
+    "mocha": "^2.5.0",
+    "mockery": "^1.7.0",
+    "sinon": "^1.17.4",
     "standard": "^7.0.0"
   },
   "engines": {
