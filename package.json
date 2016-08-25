@@ -17,7 +17,7 @@
     "mocha": "^3.0.1",
     "mockery": "^1.7.0",
     "sinon": "^1.17.4",
-    "standard": "^7.0.0"
+    "standard": "^8.0.0"
   },
   "engines": {
     "node": "5.*"
