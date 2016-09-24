@@ -53,3 +53,22 @@ gulp.task('lint:template', function () {
     .pipe(pugLinter.reporter('fail'))
 })
 ```
+
+Specify your own custom reporter:
+
+```js
+// gulpfile.js
+var gulp = require('gulp')
+var pugLinter = require('gulp-pug-linter')
+
+var myReporter = function (errors) {
+  if (errors.length) { console.error("It broke!"); }
+};
+
+gulp.task('lint:template', function () {
+  return gulp
+    .src('./**/*.pug')
+    .pipe(pugLinter())
+    .pipe(pugLinter.reporter(myReporter))
+})
+```

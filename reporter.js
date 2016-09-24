@@ -30,7 +30,16 @@ var loadReporter = function (type) {
   if (type === 'fail') {
     return failReporter
   }
-  throw new gutil.PluginError(PLUGIN_NAME, type + ' is not a valid reporter')
+
+  var reporter
+  if (typeof type === 'function') {
+    reporter = type
+  }
+
+  if (typeof reporter !== 'function') {
+    throw new gutil.PluginError(PLUGIN_NAME, type + ' is not a valid reporter')
+  }
+  return reporter
 }
 
 module.exports = function (type) {
