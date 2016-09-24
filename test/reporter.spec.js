@@ -17,7 +17,7 @@ describe('#reporter()', function () {
       path: 'path.pug'
     })
 
-    streamFile.pugLinter = {errors: ['some error']}
+    streamFile.pugLinter = {errors: [{message: 'some error'}]}
 
     it('should print the error', function () {
       gulpUtil = {log: function () {}}

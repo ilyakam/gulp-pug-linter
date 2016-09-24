@@ -17,11 +17,7 @@ function gulpPugLinter () {
    * @returns {Array} List of error messages
    */
   function checkFile (file) {
-    var errors = linter.checkFile(file.path)
-
-    return errors.map(function (error) {
-      return error.message
-    })
+    return linter.checkFile(file.path)
   }
 
   linter.configure(config)

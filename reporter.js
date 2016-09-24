@@ -16,7 +16,9 @@ module.exports = function (hasToFail) {
     var allErrors
 
     if (errors.length) {
-      allErrors = errors.join('\n\n')
+      allErrors = errors.map(function (error) {
+        return error.message
+      }).join('\n\n')
 
       hasToFail
         ? this.emit('error', new gutil.PluginError(PLUGIN_NAME, allErrors))
