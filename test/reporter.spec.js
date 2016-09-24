@@ -49,6 +49,21 @@ describe('#reporter()', function () {
       mockery.deregisterAll()
     })
 
+    it('should throw an error for missing reporter', function () {
+      function shouldThrowError () {
+        reporter = require('../reporter')
+
+        stream = reporter('missingReporter')
+
+        stream.write(streamFile)
+
+        stream.end()
+      }
+
+      expect(shouldThrowError)
+        .to.throw('missingReporter is not a valid reporter')
+    })
+
     it('should throw an error when set to fail', function () {
       function shouldThrowError () {
         reporter = require('../reporter')
@@ -73,7 +88,52 @@ describe('#reporter()', function () {
       path: 'path.pug'
     })
 
-    it('should not throw an error', function () {
+    it('should print no errors', function () {
+      gulpUtil = {log: function () {}}
+
+      sinon.stub(gulpUtil)
+
+      mockery.enable({
+        useCleanCache: true,
+        warnOnUnregistered: false
+      })
+
+      mockery.registerMock('gulp-util', gulpUtil)
+
+      reporter = require('../reporter')
+
+      stream = reporter()
+
+      stream.write(streamFile)
+
+      stream.end()
+
+      expect(gulpUtil.log.called)
+        .to.not.be.ok
+
+      gulpUtil.log.restore()
+
+      mockery.disable()
+
+      mockery.deregisterAll()
+    })
+
+    it('should throw an error for missing reporter', function () {
+      function shouldThrowError () {
+        reporter = require('../reporter')
+
+        stream = reporter('missingReporter')
+
+        stream.write(streamFile)
+
+        stream.end()
+      }
+
+      expect(shouldThrowError)
+        .to.throw('missingReporter is not a valid reporter')
+    })
+
+    it('should not throw an error for fail reporter', function () {
       function shouldNotThrowError () {
         reporter = require('../reporter')
 
