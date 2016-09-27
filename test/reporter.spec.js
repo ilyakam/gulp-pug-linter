@@ -49,6 +49,33 @@ describe('#reporter()', function () {
       mockery.deregisterAll()
     })
 
+    it('should report errors for named reporter', function () {
+      var funcReporter = function (errors) {}
+      var spiedReporter = sinon.spy(funcReporter)
+
+      mockery.enable({
+        useCleanCache: true,
+        warnOnUnregistered: false
+      })
+
+      mockery.registerMock('pug-mock-reporter', spiedReporter)
+
+      reporter = require('../reporter')
+
+      stream = reporter('pug-mock-reporter')
+
+      stream.write(streamFile)
+
+      stream.end()
+
+      expect(spiedReporter.calledWith([{message: 'some error'}]))
+        .to.be.ok
+
+      mockery.disable()
+
+      mockery.deregisterAll()
+    })
+
     it('should report errors for function reporter', function () {
       var funcReporter = function (errors) {}
 

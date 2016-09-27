@@ -35,6 +35,11 @@ var loadReporter = function (type) {
   if (typeof type === 'function') {
     reporter = type
   }
+  if (typeof type === 'string') {
+    try {
+      reporter = require(type)
+    } catch (error) {}
+  }
 
   if (typeof reporter !== 'function') {
     throw new gutil.PluginError(PLUGIN_NAME, type + ' is not a valid reporter')
