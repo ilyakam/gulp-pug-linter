@@ -14,10 +14,10 @@
     "coveralls": "^2.11.9",
     "gulp": "^3.9.1",
     "istanbul": "^0.4.2",
-    "mocha": "^2.5.0",
-    "mockery": "^1.7.0",
+    "mocha": "^3.0.1",
+    "mockery": "^2.0.0",
     "sinon": "^1.17.4",
-    "standard": "^7.0.0"
+    "standard": "^8.0.0"
   },
   "engines": {
     "node": "5.*"
@@ -43,5 +43,5 @@
     "pretest": "standard",
     "test": "npm run-script coveralls"
   },
-  "version": "0.3.0"
+  "version": "0.4.0"
 }

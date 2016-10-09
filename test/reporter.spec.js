@@ -17,9 +17,9 @@ describe('#reporter()', function () {
       path: 'path.pug'
     })
 
-    streamFile.pugLinter = {errors: ['some error']}
+    streamFile.pugLinter = {errors: [{message: 'some error'}]}
 
-    it('should print the error', function () {
+    it('should print the error for default reporter', function () {
       gulpUtil = {log: function () {}}
 
       sinon.stub(gulpUtil)
@@ -49,7 +49,67 @@ describe('#reporter()', function () {
       mockery.deregisterAll()
     })
 
-    it('should throw an error when set to fail', function () {
+    it('should report errors for named reporter', function () {
+      var funcReporter = function (errors) {}
+
+      var spiedReporter = sinon.spy(funcReporter)
+
+      mockery.enable({
+        useCleanCache: true,
+        warnOnUnregistered: false
+      })
+
+      mockery.registerMock('pug-mock-reporter', spiedReporter)
+
+      reporter = require('../reporter')
+
+      stream = reporter('pug-mock-reporter')
+
+      stream.write(streamFile)
+
+      stream.end()
+
+      expect(spiedReporter.calledWith([{message: 'some error'}]))
+        .to.be.ok
+
+      mockery.disable()
+
+      mockery.deregisterAll()
+    })
+
+    it('should report errors for function reporter', function () {
+      var funcReporter = function (errors) {}
+
+      var spy = sinon.spy(funcReporter)
+
+      reporter = require('../reporter')
+
+      stream = reporter(spy)
+
+      stream.write(streamFile)
+
+      stream.end()
+
+      expect(spy.calledWith([{message: 'some error'}]))
+        .to.be.ok
+    })
+
+    it('should throw an error for missing reporter', function () {
+      function shouldThrowError () {
+        reporter = require('../reporter')
+
+        stream = reporter('missingReporter')
+
+        stream.write(streamFile)
+
+        stream.end()
+      }
+
+      expect(shouldThrowError)
+        .to.throw('missingReporter is not a valid reporter')
+    })
+
+    it('should throw an error for fail reporter', function () {
       function shouldThrowError () {
         reporter = require('../reporter')
 
@@ -73,7 +133,69 @@ describe('#reporter()', function () {
       path: 'path.pug'
     })
 
-    it('should not throw an error', function () {
+    it('should print no errors for default reporter', function () {
+      gulpUtil = {log: function () {}}
+
+      sinon.stub(gulpUtil)
+
+      mockery.enable({
+        useCleanCache: true,
+        warnOnUnregistered: false
+      })
+
+      mockery.registerMock('gulp-util', gulpUtil)
+
+      reporter = require('../reporter')
+
+      stream = reporter()
+
+      stream.write(streamFile)
+
+      stream.end()
+
+      expect(gulpUtil.log.called)
+        .to.not.be.ok
+
+      gulpUtil.log.restore()
+
+      mockery.disable()
+
+      mockery.deregisterAll()
+    })
+
+    it('should report empty errors for function reporter', function () {
+      var funcReporter = function (errors) {}
+
+      var spy = sinon.spy(funcReporter)
+
+      reporter = require('../reporter')
+
+      stream = reporter(spy)
+
+      stream.write(streamFile)
+
+      stream.end()
+
+      expect(spy.calledWith([]))
+        .to.be.ok
+    })
+
+    it('should throw an error for missing reporter', function () {
+      function shouldThrowError () {
+        reporter = require('../reporter')
+
+        stream = reporter('missingReporter')
+
+        stream.write(streamFile)
+
+        stream.end()
+      }
+
+      expect(shouldThrowError)
+        .to.throw('missingReporter is not a valid reporter')
+    })
+
+    it('should not throw an error for fail reporter', function () {
       function shouldNotThrowError () {
         reporter = require('../reporter')
 
