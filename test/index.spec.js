@@ -165,7 +165,7 @@ describe('gulp-pug-linter', function () {
     it('should stream a file that contains errors', function () {
       stream.on('data', function (processedFile) {
         expect(processedFile.pugLinter.errors)
-          .to.contain('some error')
+          .to.contain({message: 'some error'})
       })
     })
   })
