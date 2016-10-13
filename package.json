@@ -20,7 +20,7 @@
     "standard": "^8.0.0"
   },
   "engines": {
-    "node": "5.*"
+    "node": "<5"
   },
   "homepage": "https://github.com/ilyakam/gulp-pug-linter#readme",
   "keywords": [
