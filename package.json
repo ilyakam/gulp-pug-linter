@@ -19,9 +19,6 @@
     "sinon": "^1.17.4",
     "standard": "^8.0.0"
   },
-  "engines": {
-    "node": "5.*"
-  },
   "homepage": "https://github.com/ilyakam/gulp-pug-linter#readme",
   "keywords": [
     "gulp",
