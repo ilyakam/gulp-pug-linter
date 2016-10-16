@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Fixed
 - Ensure unit tests can run in Windows
+- Ensure Node engine is not limited to v5.x
 
 ## [0.4.0] - 2016-10-09
 ### Added
