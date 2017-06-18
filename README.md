@@ -94,8 +94,8 @@ var gulp = require('gulp')
 var pugLinter = require('gulp-pug-linter')
 
 var myReporter = function (errors) {
-  if (errors.length) { console.error("It broke!"); }
-};
+  if (errors.length) { console.error('It broke!') }
+}
 
 gulp.task('lint:template', function () {
   return gulp
