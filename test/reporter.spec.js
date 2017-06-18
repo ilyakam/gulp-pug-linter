@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-env mocha */
 var expect = require('chai').expect
 var gutil = require('gulp-util')
@@ -12,7 +13,7 @@ describe('#reporter()', function () {
   describe('when the stream contains PugLinter errors', function () {
     var streamFile = new gutil.File({
       base: 'base',
-      contents: new Buffer(''),
+      contents: Buffer.from(''),
       cwd: __dirname,
       path: 'path.pug'
     })
@@ -128,7 +129,7 @@ describe('#reporter()', function () {
   describe('when the stream does not contain PugLinter errors', function () {
     var streamFile = new gutil.File({
       base: 'base',
-      contents: new Buffer(''),
+      contents: Buffer.from(''),
       cwd: __dirname,
       path: 'path.pug'
     })
