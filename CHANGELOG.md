@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2017-06-17
+### Changed
+- Bump Chai, Sinon, and StandardJS packages
+
 ## [0.4.1] - 2016-10-15
 ### Fixed
 - Ensure unit tests can run in Windows
