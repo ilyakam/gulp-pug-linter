@@ -85,7 +85,7 @@ describe('gulp-pug-linter', function () {
 
     beforeEach(function () {
       var PugLintStub = {
-        checkFile: function () { return [] },
+        checkString: function () { return [] },
         configure: function () {}
       }
 
@@ -135,7 +135,7 @@ describe('gulp-pug-linter', function () {
 
     beforeEach(function () {
       var PugLintStub = {
-        checkFile: function () { return [{message: 'some error'}] },
+        checkString: function () { return [{message: 'some error'}] },
         configure: function () {}
       }
 

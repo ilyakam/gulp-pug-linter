@@ -14,10 +14,11 @@ function gulpPugLinter () {
    * @description Checks the given file for lint errors
    * @param {Object} file File chunk
    * @param {String} file.path File path
+   * @param {Buffer} file.contents Contents of the file.
    * @returns {Array} List of error messages
    */
   function checkFile (file) {
-    return linter.checkFile(file.path)
+    return linter.checkString(file.contents.toString('utf-8'), file.path)
   }
 
   linter.configure(config)
@@ -31,13 +32,15 @@ function gulpPugLinter () {
       return callback(
         new PluginError(PLUGIN_NAME, 'Streaming is not supported')
       )
+    } else if (file.isBuffer()) {
+      errors = checkFile(file)
+
+      file.pugLinter = {errors: errors}
+
+      return callback(null, file)
+    } else {
+      return callback(null, file)
     }
-
-    errors = checkFile(file)
-
-    file.pugLinter = {errors: errors}
-
-    return callback(null, file)
   })
 }
 
