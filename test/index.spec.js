@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-env mocha */
 var expect = require('chai').expect
-var gutil = require('gulp-util')
 var proxyquire = require('proxyquire')
 var sinon = require('sinon')
+var Vinyl = require('vinyl')
 
 describe('gulp-pug-linter', function () {
   var stream
@@ -74,7 +74,7 @@ describe('gulp-pug-linter', function () {
 
       gulpPugLinter = proxyquire('../index', {'pug-lint': mockPugLint})
 
-      file = new gutil.File({
+      file = new Vinyl({
         base: 'base',
         contents: Buffer.from(''),
         cwd: __dirname,
@@ -118,7 +118,7 @@ describe('gulp-pug-linter', function () {
 
       gulpPugLinter = proxyquire('../index', {'pug-lint': mockPugLint})
 
-      file = new gutil.File({
+      file = new Vinyl({
         base: 'base',
         contents: Buffer.from(''),
         cwd: __dirname,
