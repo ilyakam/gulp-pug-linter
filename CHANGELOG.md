@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Greenkeeper to automatically keep dependencies up to date
+
 ### Fixed
 - Update CONTRIBUTING list items to be in order
 - Ignore all `*.pug` and `*.jade` files in this repository
