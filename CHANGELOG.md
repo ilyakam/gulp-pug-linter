@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Fixed
+- Update CONTRIBUTING list items to be in order
+
 ## [0.5.1] - 2017-06-17
 ### Fixed
 - Update README examples to adhere to StandardJS
