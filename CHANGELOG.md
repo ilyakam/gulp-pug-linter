@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Fixed
 - Update CONTRIBUTING list items to be in order
+- Ignore all `*.pug` and `*.jade` files in this repository
 
 ## [0.5.1] - 2017-06-17
 ### Fixed
