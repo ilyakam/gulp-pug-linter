@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Greenkeeper to automatically keep dependencies up to date
+- Ability to automatically run tests on change with `npm run watch`
 
 ### Fixed
 - Update CONTRIBUTING list items to be in order
