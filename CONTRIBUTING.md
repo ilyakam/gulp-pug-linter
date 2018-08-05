@@ -74,7 +74,7 @@ However, the project is being developed by the community. You're encouraged to c
 
 #### unit tests
 
-1. Run `npm run coverage`
+1. Run `npm run watch` and it will automatically rerun the tests on change
 
 ## Commit Guidelines
 

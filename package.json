@@ -15,7 +15,7 @@
     "gulp": "^3.9.1",
     "istanbul": "^0.4.2",
     "mocha": "^3.0.1",
-    "mockery": "^2.0.0",
+    "proxyquire": "^2.0.1",
     "sinon": "^2.3.4",
     "standard": "^10.0.2"
   },
@@ -38,10 +38,11 @@
     "url": "git+https://github.com/ilyakam/gulp-pug-linter.git"
   },
   "scripts": {
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
-    "coveralls": "npm run-script coverage && node ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info",
+    "coverage": "istanbul cover _mocha -- -R spec",
+    "coveralls": "npm run coverage && coveralls < coverage/lcov.info",
     "pretest": "standard",
-    "test": "npm run-script coveralls"
+    "test": "npm run coveralls",
+    "watch": "mocha --watch || exit 0"
   },
   "version": "0.5.1"
 }
