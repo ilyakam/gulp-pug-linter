@@ -15,7 +15,7 @@
     "gulp": "^3.9.1",
     "istanbul": "^0.4.2",
     "mocha": "^3.0.1",
-    "mockery": "^2.0.0",
+    "proxyquire": "^2.0.1",
     "sinon": "^2.3.4",
     "standard": "^10.0.2"
   },

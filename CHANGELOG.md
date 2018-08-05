@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Greenkeeper to automatically keep dependencies up to date
 - Ability to automatically run tests on change with `npm run watch`
 
+### Changed
+- Require packages using `proxyquire` instead of `mockery` in the unit tests
+
 ### Fixed
 - Update CONTRIBUTING list items to be in order
 - Ignore all `*.pug` and `*.jade` files in this repository

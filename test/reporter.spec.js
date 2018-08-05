@@ -2,37 +2,33 @@
 /* eslint-env mocha */
 var expect = require('chai').expect
 var gutil = require('gulp-util')
-var mockery = require('mockery')
+var proxyquire = require('proxyquire')
 var sinon = require('sinon')
 
 describe('#reporter()', function () {
-  var gulpUtil
   var reporter
+  var mockGulpUtil
+  var mockReporter
   var stream
 
   describe('when the stream contains PugLinter errors', function () {
-    var streamFile = new gutil.File({
-      base: 'base',
-      contents: Buffer.from(''),
-      cwd: __dirname,
-      path: 'path.pug'
-    })
+    var streamFile
 
-    streamFile.pugLinter = {errors: [{message: 'some error'}]}
-
-    it('should print the error for default reporter', function () {
-      gulpUtil = {log: function () {}}
-
-      sinon.stub(gulpUtil)
-
-      mockery.enable({
-        useCleanCache: true,
-        warnOnUnregistered: false
+    beforeEach(function () {
+      streamFile = new gutil.File({
+        base: 'base',
+        contents: Buffer.from(''),
+        cwd: __dirname,
+        path: 'path.pug'
       })
 
-      mockery.registerMock('gulp-util', gulpUtil)
+      streamFile.pugLinter = {errors: [{message: 'some error'}]}
+    })
 
-      reporter = require('../reporter')
+    it('should print the error for default reporter', function () {
+      mockGulpUtil = {log: sinon.stub()}
+
+      reporter = proxyquire('../reporter', {'gulp-util': mockGulpUtil})
 
       stream = reporter()
 
@@ -40,29 +36,21 @@ describe('#reporter()', function () {
 
       stream.end()
 
-      expect(gulpUtil.log.calledWith('some error'))
+      expect(mockGulpUtil.log.calledWith('some error'))
         .to.be.ok
-
-      gulpUtil.log.restore()
-
-      mockery.disable()
-
-      mockery.deregisterAll()
     })
 
     it('should report errors for named reporter', function () {
-      var funcReporter = function (errors) {}
+      funcReporter['@noCallThru'] = true
 
-      var spiedReporter = sinon.spy(funcReporter)
+      function funcReporter (errors) {}
 
-      mockery.enable({
-        useCleanCache: true,
-        warnOnUnregistered: false
-      })
+      mockReporter = sinon.spy(funcReporter)
 
-      mockery.registerMock('pug-mock-reporter', spiedReporter)
-
-      reporter = require('../reporter')
+      reporter = proxyquire(
+        '../reporter',
+        {'pug-mock-reporter': mockReporter}
+      )
 
       stream = reporter('pug-mock-reporter')
 
@@ -70,12 +58,8 @@ describe('#reporter()', function () {
 
       stream.end()
 
-      expect(spiedReporter.calledWith([{message: 'some error'}]))
+      expect(mockReporter.calledWith([{message: 'some error'}]))
         .to.be.ok
-
-      mockery.disable()
-
-      mockery.deregisterAll()
     })
 
     it('should report errors for function reporter', function () {
@@ -127,26 +111,21 @@ describe('#reporter()', function () {
   })
 
   describe('when the stream does not contain PugLinter errors', function () {
-    var streamFile = new gutil.File({
-      base: 'base',
-      contents: Buffer.from(''),
-      cwd: __dirname,
-      path: 'path.pug'
+    var streamFile
+
+    beforeEach(function () {
+      streamFile = new gutil.File({
+        base: 'base',
+        contents: Buffer.from(''),
+        cwd: __dirname,
+        path: 'path.pug'
+      })
     })
 
     it('should print no errors for default reporter', function () {
-      gulpUtil = {log: function () {}}
+      mockGulpUtil = {log: sinon.stub()}
 
-      sinon.stub(gulpUtil)
-
-      mockery.enable({
-        useCleanCache: true,
-        warnOnUnregistered: false
-      })
-
-      mockery.registerMock('gulp-util', gulpUtil)
-
-      reporter = require('../reporter')
+      reporter = proxyquire('../reporter', {'gulp-util': mockGulpUtil})
 
       stream = reporter()
 
@@ -154,14 +133,8 @@ describe('#reporter()', function () {
 
       stream.end()
 
-      expect(gulpUtil.log.called)
+      expect(mockGulpUtil.log.called)
         .to.not.be.ok
-
-      gulpUtil.log.restore()
-
-      mockery.disable()
-
-      mockery.deregisterAll()
     })
 
     it('should report empty errors for function reporter', function () {
