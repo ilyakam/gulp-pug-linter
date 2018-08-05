@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-env mocha */
 var expect = require('chai').expect
-var gutil = require('gulp-util')
 var proxyquire = require('proxyquire')
 var sinon = require('sinon')
+var Vinyl = require('vinyl')
 
 describe('#reporter()', function () {
   var reporter
-  var mockGulpUtil
+  var mockFancyLog
   var mockReporter
   var stream
 
@@ -15,7 +15,7 @@ describe('#reporter()', function () {
     var streamFile
 
     beforeEach(function () {
-      streamFile = new gutil.File({
+      streamFile = new Vinyl({
         base: 'base',
         contents: Buffer.from(''),
         cwd: __dirname,
@@ -26,9 +26,9 @@ describe('#reporter()', function () {
     })
 
     it('should print the error for default reporter', function () {
-      mockGulpUtil = {log: sinon.stub()}
+      mockFancyLog = sinon.stub()
 
-      reporter = proxyquire('../reporter', {'gulp-util': mockGulpUtil})
+      reporter = proxyquire('../reporter', {'fancy-log': mockFancyLog})
 
       stream = reporter()
 
@@ -36,7 +36,7 @@ describe('#reporter()', function () {
 
       stream.end()
 
-      expect(mockGulpUtil.log.calledWith('some error'))
+      expect(mockFancyLog.calledWith('some error'))
         .to.be.ok
     })
 
@@ -114,7 +114,7 @@ describe('#reporter()', function () {
     var streamFile
 
     beforeEach(function () {
-      streamFile = new gutil.File({
+      streamFile = new Vinyl({
         base: 'base',
         contents: Buffer.from(''),
         cwd: __dirname,
@@ -123,9 +123,9 @@ describe('#reporter()', function () {
     })
 
     it('should print no errors for default reporter', function () {
-      mockGulpUtil = {log: sinon.stub()}
+      mockFancyLog = sinon.stub()
 
-      reporter = proxyquire('../reporter', {'gulp-util': mockGulpUtil})
+      reporter = proxyquire('../reporter', {'fancy-log': mockFancyLog})
 
       stream = reporter()
 
@@ -133,7 +133,7 @@ describe('#reporter()', function () {
 
       stream.end()
 
-      expect(mockGulpUtil.log.called)
+      expect(mockFancyLog.called)
         .to.not.be.ok
     })
 

@@ -1,5 +1,5 @@
 var configFile = require('pug-lint/lib/config-file')
-var PluginError = require('gulp-util').PluginError
+var PluginError = require('plugin-error')
 var PugLint = require('pug-lint')
 var throughObj = require('through2').obj
 

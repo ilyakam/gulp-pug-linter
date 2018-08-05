@@ -1,4 +1,5 @@
-var gutil = require('gulp-util')
+var fancyLog = require('fancy-log')
+var PluginError = require('plugin-error')
 var throughObj = require('through2').obj
 
 const PLUGIN_NAME = 'gulp-pug-linter'
@@ -16,7 +17,7 @@ var defaultReporter = function (errors) {
       return error.message
     }).join('\n\n')
 
-    gutil.log(allErrors)
+    fancyLog(allErrors)
   }
 }
 
@@ -33,7 +34,7 @@ var failReporter = function (errors) {
       return error.message
     }).join('\n\n')
 
-    this.emit('error', new gutil.PluginError(PLUGIN_NAME, allErrors))
+    this.emit('error', new PluginError(PLUGIN_NAME, allErrors))
   }
 }
 
@@ -67,7 +68,7 @@ var loadReporter = function (type) {
   }
 
   if (typeof reporter !== 'function') {
-    throw new gutil.PluginError(PLUGIN_NAME, type + ' is not a valid reporter')
+    throw new PluginError(PLUGIN_NAME, type + ' is not a valid reporter')
   }
 
   return reporter
