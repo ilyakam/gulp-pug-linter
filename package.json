@@ -46,5 +46,5 @@
     "test": "npm run coveralls",
     "watch": "mocha --watch || exit 0"
   },
-  "version": "0.5.1"
+  "version": "0.6.0"
 }

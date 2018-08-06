@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.6.0] - 2018-08-05
 ### Added
 - Greenkeeper to automatically keep dependencies up to date
 - Ability to automatically run tests on change with `npm run watch`
