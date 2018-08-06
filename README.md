@@ -7,7 +7,8 @@ Gulp plugin to lint Pug (nee Jade) files
 [![npm](https://nodei.co/npm/gulp-pug-linter.png)](https://nodei.co/npm/gulp-pug-linter/)  
 [![Codeship Status](https://www.codeship.io/projects/ca7127f0-dd21-0133-5b9a-6a36b574da30/status?branch=develop)](https://www.codeship.io/projects/144282)
 [![Coverage Status](https://coveralls.io/repos/github/ilyakam/gulp-pug-linter/badge.svg?branch=develop)](https://coveralls.io/github/ilyakam/gulp-pug-linter?branch=develop)
-[![Dependency Status](https://david-dm.org/ilyakam/gulp-pug-linter.svg)](https://david-dm.org/ilyakam/gulp-pug-linter)
+[![Dependencies Status](https://david-dm.org/ilyakam/gulp-pug-linter/status.svg)](https://david-dm.org/ilyakam/gulp-pug-linter)
+[![Dev Dependencies Status](https://david-dm.org/ilyakam/gulp-pug-linter/dev-status.svg)](https://david-dm.org/ilyakam/gulp-pug-linter?type=dev)
 [![Code Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ilyakam/gulp-pug-linter.svg)](https://greenkeeper.io/)
 

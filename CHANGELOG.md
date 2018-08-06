@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Greenkeeper to automatically keep dependencies up to date
 - Ability to automatically run tests on change with `npm run watch`
+- David `devDependencies` badge
 
 ### Changed
 - Require packages using `proxyquire` instead of `mockery` in the unit tests
