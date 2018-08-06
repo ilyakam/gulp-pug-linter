@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Require packages using `proxyquire` instead of `mockery` in the unit tests
 - Replace deprecated `gulp-util` with `fancy-log`, `plugin-error`, and `vinyl`
+- Upgraded `coveralls`, `gulp`, and `mocha` due to vulnerabilities found by `npm audit`
 
 ### Fixed
 - Update CONTRIBUTING list items to be in order
