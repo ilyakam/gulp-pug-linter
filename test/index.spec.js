@@ -1,40 +1,23 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-env mocha */
 var expect = require('chai').expect
-var gutil = require('gulp-util')
-var mockery = require('mockery')
+var proxyquire = require('proxyquire')
 var sinon = require('sinon')
+var Vinyl = require('vinyl')
 
 describe('gulp-pug-linter', function () {
-  var configFile
   var stream
 
-  beforeEach(function () {
-    configFile = {load: function () {}}
-
-    sinon.spy(configFile, 'load')
-
-    sinon.mock(configFile)
-
-    mockery.enable({
-      useCleanCache: true,
-      warnOnUnregistered: false
-    })
-
-    mockery.registerMock('pug-lint/lib/config-file', configFile)
-  })
-
-  afterEach(function () {
-    mockery.disable()
-
-    mockery.deregisterAll()
-  })
-
   describe('when the stream contents are irrelevant', function () {
+    var configFile
     var gulpPugLinter
 
     beforeEach(function () {
-      gulpPugLinter = require('../index')
+      configFile = {load: sinon.stub()}
+
+      gulpPugLinter = proxyquire('../index', {
+        'pug-lint/lib/config-file': configFile
+      })
 
       stream = gulpPugLinter()
     })
@@ -81,23 +64,17 @@ describe('gulp-pug-linter', function () {
   describe('when there are no errors', function () {
     var file
     var gulpPugLinter
-    var PugLint
+    var mockPugLint
 
     beforeEach(function () {
-      var PugLintStub = {
-        checkFile: function () { return [] },
-        configure: function () {}
-      }
+      mockPugLint = sinon.stub().returns({
+        checkFile: sinon.stub().returns([]),
+        configure: sinon.stub()
+      })
 
-      PugLint = function () { return PugLintStub }
+      gulpPugLinter = proxyquire('../index', {'pug-lint': mockPugLint})
 
-      sinon.mock(PugLintStub)
-
-      mockery.registerMock('pug-lint', PugLint)
-
-      gulpPugLinter = require('../index')
-
-      file = new gutil.File({
+      file = new Vinyl({
         base: 'base',
         contents: Buffer.from(''),
         cwd: __dirname,
@@ -131,23 +108,17 @@ describe('gulp-pug-linter', function () {
   describe('when there are errors', function () {
     var file
     var gulpPugLinter
-    var PugLint
+    var mockPugLint
 
     beforeEach(function () {
-      var PugLintStub = {
-        checkFile: function () { return [{message: 'some error'}] },
-        configure: function () {}
-      }
+      mockPugLint = sinon.stub().returns({
+        checkFile: sinon.stub().returns([{message: 'some error'}]),
+        configure: sinon.stub()
+      })
 
-      PugLint = function () { return PugLintStub }
+      gulpPugLinter = proxyquire('../index', {'pug-lint': mockPugLint})
 
-      sinon.mock(PugLintStub)
-
-      mockery.registerMock('pug-lint', PugLint)
-
-      gulpPugLinter = require('../index')
-
-      file = new gutil.File({
+      file = new Vinyl({
         base: 'base',
         contents: Buffer.from(''),
         cwd: __dirname,

@@ -39,7 +39,7 @@ However, the project is being developed by the community. You're encouraged to c
 
 ### Initial Setup
 
-1. Make sure that you have the latest version of `node` installed (`node -v`); tested using `v5.10.x`
+1. Make sure that you have the latest version of `node` installed (`node -v`); tested using `v8.11.x`
 1. Clone this repo `git clone git@github.com:ilyakam/gulp-pug-linter.git`
 1. `cd gulp-pug-linter`
 1. `npm install`
@@ -50,32 +50,31 @@ However, the project is being developed by the community. You're encouraged to c
 
 1. Pick a [rule](https://github.com/pugjs/pug-lint/blob/master/docs/rules.md) that you'd like to test
 1. Create a `.pug-lint.json` file with the rule in place, e.g.:
-  ```json
-  {
-    "disallowIdLiterals": true
-  }
-  ```
-
+   ```json
+   {
+     "disallowIdLiterals": true
+   }
+   ```
 1. Create a folder with one or more `.pug` files that violate the rule
 1. Create a `gulpfile.js` at the root of the repo, with the following code:
-  ```js
-  var gulp = require('gulp')
-  var pugLinter = require('./')
+    ```js
+    var gulp = require('gulp')
+    var pugLinter = require('./')
 
-  gulp.task('default', ['test'])
+    gulp.task('default', ['test'])
 
-  gulp.task('test', function () {
-    return gulp
-      .src('./**/*.pug')
-      .pipe(pugLinter()) // or .pipe(pugLinter('fail'))
-      .pipe(pugLinter.reporter())
-  })
-  ```
+    gulp.task('test', function () {
+      return gulp
+        .src('./**/*.pug')
+        .pipe(pugLinter()) // or .pipe(pugLinter('fail'))
+        .pipe(pugLinter.reporter())
+    })
+    ```
 1. Run `gulp`
 
 #### unit tests
 
-1. Run `npm run-script coverage`
+1. Run `npm run watch` and it will automatically rerun the tests on change
 
 ## Commit Guidelines
 

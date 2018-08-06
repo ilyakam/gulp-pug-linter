@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0] - 2018-08-05
+### Added
+- Greenkeeper to automatically keep dependencies up to date
+- Ability to automatically run tests on change with `npm run watch`
+- David `devDependencies` badge
+
+### Changed
+- Require packages using `proxyquire` instead of `mockery` in the unit tests
+- Replace deprecated `gulp-util` with `fancy-log`, `plugin-error`, and `vinyl`
+- Upgraded `coveralls`, `gulp`, and `mocha` due to vulnerabilities found by `npm audit`
+
+### Fixed
+- Update CONTRIBUTING list items to be in order
+- Ignore all `*.pug` and `*.jade` files in this repository
+
 ## [0.5.1] - 2017-06-17
 ### Fixed
 - Update README examples to adhere to StandardJS
