@@ -13,7 +13,7 @@ describe('gulp-pug-linter', function () {
     var gulpPugLinter
 
     beforeEach(function () {
-      configFile = {load: sinon.stub()}
+      configFile = { load: sinon.stub() }
 
       gulpPugLinter = proxyquire('../index', {
         'pug-lint/lib/config-file': configFile
@@ -32,7 +32,7 @@ describe('gulp-pug-linter', function () {
     })
 
     describe('when file is null', function () {
-      var nullFile = {isNull: function () { return true }}
+      var nullFile = { isNull: function () { return true } }
 
       it('should pass the file', function () {
         stream.on('data', function (data) {
@@ -72,7 +72,7 @@ describe('gulp-pug-linter', function () {
         configure: sinon.stub()
       })
 
-      gulpPugLinter = proxyquire('../index', {'pug-lint': mockPugLint})
+      gulpPugLinter = proxyquire('../index', { 'pug-lint': mockPugLint })
 
       file = new Vinyl({
         base: 'base',
@@ -112,11 +112,11 @@ describe('gulp-pug-linter', function () {
 
     beforeEach(function () {
       mockPugLint = sinon.stub().returns({
-        checkFile: sinon.stub().returns([{message: 'some error'}]),
+        checkFile: sinon.stub().returns([{ message: 'some error' }]),
         configure: sinon.stub()
       })
 
-      gulpPugLinter = proxyquire('../index', {'pug-lint': mockPugLint})
+      gulpPugLinter = proxyquire('../index', { 'pug-lint': mockPugLint })
 
       file = new Vinyl({
         base: 'base',
@@ -137,7 +137,7 @@ describe('gulp-pug-linter', function () {
     it('should stream a file that contains errors', function () {
       stream.on('data', function (processedFile) {
         expect(processedFile.pugLinter.errors)
-          .to.deep.include({message: 'some error'})
+          .to.deep.include({ message: 'some error' })
       })
     })
   })

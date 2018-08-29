@@ -22,13 +22,13 @@ describe('#reporter()', function () {
         path: 'path.pug'
       })
 
-      streamFile.pugLinter = {errors: [{message: 'some error'}]}
+      streamFile.pugLinter = { errors: [{ message: 'some error' }] }
     })
 
     it('should print the error for default reporter', function () {
       mockFancyLog = sinon.stub()
 
-      reporter = proxyquire('../reporter', {'fancy-log': mockFancyLog})
+      reporter = proxyquire('../reporter', { 'fancy-log': mockFancyLog })
 
       stream = reporter()
 
@@ -49,7 +49,7 @@ describe('#reporter()', function () {
 
       reporter = proxyquire(
         '../reporter',
-        {'pug-mock-reporter': mockReporter}
+        { 'pug-mock-reporter': mockReporter }
       )
 
       stream = reporter('pug-mock-reporter')
@@ -58,7 +58,7 @@ describe('#reporter()', function () {
 
       stream.end()
 
-      expect(mockReporter.calledWith([{message: 'some error'}]))
+      expect(mockReporter.calledWith([{ message: 'some error' }]))
         .to.be.ok
     })
 
@@ -75,7 +75,7 @@ describe('#reporter()', function () {
 
       stream.end()
 
-      expect(spy.calledWith([{message: 'some error'}]))
+      expect(spy.calledWith([{ message: 'some error' }]))
         .to.be.ok
     })
 
@@ -125,7 +125,7 @@ describe('#reporter()', function () {
     it('should print no errors for default reporter', function () {
       mockFancyLog = sinon.stub()
 
-      reporter = proxyquire('../reporter', {'fancy-log': mockFancyLog})
+      reporter = proxyquire('../reporter', { 'fancy-log': mockFancyLog })
 
       stream = reporter()
 
