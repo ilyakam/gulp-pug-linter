@@ -1,13 +1,51 @@
-var configFile = require('pug-lint/lib/config-file')
-var PluginError = require('plugin-error')
-var PugLint = require('pug-lint')
-var throughObj = require('through2').obj
+const configFile = require('pug-lint/lib/config-file');
+const fancyLog = require('fancy-log');
+const PluginError = require('plugin-error');
+const PugLint = require('pug-lint');
+const throughObj = require('through2').obj;
 
-const PLUGIN_NAME = 'gulp-pug-linter'
+const PLUGIN_NAME = 'gulp-pug-linter';
 
-function gulpPugLinter () {
-  var config = configFile.load()
-  var linter = new PugLint()
+/**
+ * @name getReporter
+ * @description Gets the reporter depending on its type
+ *              Falls back to the default reporter with a warning
+ * @param {*} reporter Existing reporter type, name, or function
+ * @returns {Function} Reporter function to be called with lint errors
+ */
+const getReporter = (reporter) => {
+  if (reporter === 'default') {
+    return report;
+  } if (typeof reporter === 'function') {
+    return reporter;
+  } if (typeof reporter === 'string') {
+    try {
+      /* eslint-disable-next-line global-require, import/no-dynamic-require */
+      return require(reporter);
+    } catch (error) {}
+  }
+
+  fancyLog.warn([
+    PLUGIN_NAME,
+    'warning:',
+    reporter,
+    'not found; falling back to default',
+  ].join(' '));
+
+  return report;
+};
+
+/**
+ * @name gulpPugLinter
+ * @description Hooks to PugLint to lint for errors
+ * @param {Object} options Configuration object
+ * @param {Boolean} failAfterError Whether to throw a plugin error after
+ *                                 encountering one or more lint errors
+ * @param {*} reporter Reporter type, name, or function to show lint errors
+ */
+const gulpPugLinter = (options = {}) => {
+  const config = configFile.load();
+  const linter = new PugLint();
 
   /**
    * @name checkFile
@@ -16,30 +54,52 @@ function gulpPugLinter () {
    * @param {String} file.path File path
    * @returns {Array} List of error messages
    */
-  function checkFile (file) {
-    return linter.checkFile(file.path)
-  }
+  const checkFile = file => linter.checkFile(file.path);
 
-  linter.configure(config)
+  linter.configure(config);
 
-  return throughObj(function (file, encoding, callback) {
-    var errors
-
+  return throughObj(function transform(file, encoding, callback) {
     if (file.isNull()) {
-      return callback(null, file)
-    } else if (file.isStream()) {
+      return callback(null, file);
+    } if (file.isStream()) {
       return callback(
-        new PluginError(PLUGIN_NAME, 'Streaming is not supported')
-      )
+        new PluginError(PLUGIN_NAME, 'Streaming is not supported'),
+      );
     }
 
-    errors = checkFile(file)
+    const errors = checkFile(file);
 
-    file.pugLinter = { errors: errors }
+    if (Object.keys(options).includes('reporter')) {
+      getReporter(options.reporter)(errors);
+    }
 
-    return callback(null, file)
-  })
-}
+    if (options.failAfterError && errors.length) {
+      this.emit('error', new PluginError(PLUGIN_NAME, 'Lint failed'));
+    }
 
-module.exports = gulpPugLinter
-module.exports.reporter = require('./reporter')
+    file.pugLinter = {
+      errors,
+      options,
+    };
+
+    return callback(null, file);
+  });
+};
+
+/**
+ * @name report
+ * @description Combines and logs lint error messages
+ * @param {Object[]} errors List of lint errors
+ * @param {String} errors.message Lint error message
+ */
+const report = (errors) => {
+  let allErrors;
+
+  if (errors.length) {
+    allErrors = errors.map(error => error.message).join('\n\n');
+
+    fancyLog(allErrors);
+  }
+};
+
+module.exports = gulpPugLinter;

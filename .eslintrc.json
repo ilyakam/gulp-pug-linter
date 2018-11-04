@@ -1,0 +1,27 @@
+{
+  "env": {
+    "es6": true,
+    "jest/globals": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base"
+  ],
+  "overrides": [{
+    "files": ["*test.js"],
+    "rules": {
+      "global-require": "off",
+      "import/no-unresolved": "off"
+    }
+  }],
+  "plugins": [
+    "jest"
+  ],
+  "root": true,
+  "rules": {
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-use-before-define": "off"
+  }
+}
