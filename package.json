@@ -42,9 +42,10 @@
   "scripts": {
     "coverage": "istanbul cover _mocha -- -R spec",
     "coveralls": "npm run coverage && coveralls < coverage/lcov.info",
+    "dev": "gulp",
     "pretest": "standard",
     "test": "npm run coveralls",
     "watch": "mocha --watch || exit 0"
   },
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

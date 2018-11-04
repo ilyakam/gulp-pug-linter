@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.7.0] - 2018-11-04
+### Added
+- Deprecation warning for version `1.0.0`
+- Migration guide to the README
+
+### Deprecated
+- Separate `reporter()` stream handler including the `'fail'` flag
+
 ## [0.6.0] - 2018-08-05
 ### Added
 - Greenkeeper to automatically keep dependencies up to date
