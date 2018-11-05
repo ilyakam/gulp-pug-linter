@@ -15,13 +15,20 @@
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^21.26.2",
+    "eslint-plugin-jest": "^21.27.1",
     "gulp": "^4.0.0",
     "jest": "^23.6.0",
     "vinyl": "^2.2.0"
   },
   "engines": {
     "node": ">=4.x"
+  },
+  "greenkeeper": {
+    "commitMessages": {
+      "dependencyUpdate": "chore(package): update ${dependency} to version ${version}\r\n\r\nAutomatically update dependencies with Greenkeeper",
+      "devDependencyUpdate": "chore(package): update ${dependency} to version ${version}\r\n\r\nAutomatically update dev dependencies with Greenkeeper",
+      "lockfileUpdate": "chore(package): update lockfile ${lockfilePath}\r\n\r\nAutomatically update lockfile with Greenkeeper"
+    }
   },
   "homepage": "https://github.com/ilyakam/gulp-pug-linter#readme",
   "keywords": [
@@ -45,5 +52,5 @@
     "pretest": "npm run lint",
     "test": "jest"
   },
-  "version": "0.7.0"
+  "version": "1.0.0"
 }

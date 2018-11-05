@@ -2,9 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.0.0] - 2018-11-04
 ### Added
 - [BREAKING CHANGE] New API with options to specify a reporter and to exit with errors
+- Custom commit message including a body for updating dependencies with Greenkeeper
 
 ### Changed
 - Rewrote the entire plugin in ES6
@@ -16,6 +17,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - [BREAKING CHANGE] Separate `reporter()` stream handler including the `'fail'` flag
+
+## [0.7.0] - 2018-11-04
+### Added
+- Deprecation warning for version `1.0.0`
+- Migration guide to the README
+
+### Deprecated
+- Separate `reporter()` stream handler including the `'fail'` flag
 
 ## [0.6.0] - 2018-08-05
 ### Added
