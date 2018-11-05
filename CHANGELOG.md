@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - [BREAKING CHANGE] New API with options to specify a reporter and to exit with errors
+- Custom commit message including a body for updating dependencies with Greenkeeper
 
 ### Changed
 - Rewrote the entire plugin in ES6
