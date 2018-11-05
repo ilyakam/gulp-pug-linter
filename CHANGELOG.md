@@ -2,13 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.7.0] - 2018-11-04
+## [Unreleased]
 ### Added
-- Deprecation warning for version `1.0.0`
-- Migration guide to the README
+- [BREAKING CHANGE] New API with options to specify a reporter and to exit with errors
 
-### Deprecated
-- Separate `reporter()` stream handler including the `'fail'` flag
+### Changed
+- Rewrote the entire plugin in ES6
+- Replaced `chai`, `istanbul`, `mocha`, `proxyquire`, and `sinon` with `jest`
+- Replaced `standard` with `eslint` and its related plugins
+- Replaced the AngularJS Commit guideline with Conventional Commits
+- Replaced `npm run watch` with `npm run test -- --watch`
+- Updated contents and code examples in the `README` and `CONTRIBUTING` guides
+
+### Removed
+- [BREAKING CHANGE] Separate `reporter()` stream handler including the `'fail'` flag
 
 ## [0.6.0] - 2018-08-05
 ### Added

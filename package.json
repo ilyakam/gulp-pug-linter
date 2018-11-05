@@ -11,14 +11,13 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
     "coveralls": "^3.0.2",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.26.2",
     "gulp": "^4.0.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
-    "proxyquire": "^2.0.1",
-    "sinon": "^6.1.4",
-    "standard": "^11.0.1",
+    "jest": "^23.6.0",
     "vinyl": "^2.2.0"
   },
   "engines": {
@@ -40,12 +39,11 @@
     "url": "git+https://github.com/ilyakam/gulp-pug-linter.git"
   },
   "scripts": {
-    "coverage": "istanbul cover _mocha -- -R spec",
-    "coveralls": "npm run coverage && coveralls < coverage/lcov.info",
+    "coveralls": "npm run test && coveralls < coverage/lcov.info",
     "dev": "gulp",
-    "pretest": "standard",
-    "test": "npm run coveralls",
-    "watch": "mocha --watch || exit 0"
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "jest"
   },
   "version": "0.7.0"
 }
