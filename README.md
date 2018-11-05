@@ -12,6 +12,68 @@ Gulp plugin to lint Pug (nee Jade) files
 [![Code Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ilyakam/gulp-pug-linter.svg)](https://greenkeeper.io/)
 
+## :warning: Warning :warning:
+
+**Breaking API Changes as of version `1.0.0`:**  
+`.reporter()` is being deprecated.
+
+### Migration Guide
+
+#### Built-in Reporter
+
+##### From:
+
+```js
+.pipe(pugLinter())
+.pipe(pugLinter.reporter())
+```
+
+##### To:
+
+```js
+.pipe(pugLinter({ reporter: 'default' }))
+```
+
+#### Break on Error
+
+##### From:
+
+```js
+.pipe(pugLinter())
+.pipe(pugLinter.reporter('fail'))
+```
+
+##### To:
+
+```js
+.pipe(pugLinter({
+  failAfterError: true,
+  reporter: 'default'
+}))
+```
+
+#### Custom Reporter
+
+##### From:
+
+```js
+.pipe(pugLinter())
+.pipe(pugLinter.reporter(myPugLintReporter))
+// OR
+.pipe(pugLinter.reporter('my-pug-lint-reporter'))
+```
+
+##### To:
+
+```js
+.pipe(pugLinter({
+  failAfterError: true,
+  reporter: myPugLintReporter
+  // OR
+  reporter: 'my-pug-lint-reporter'
+}))
+```
+
 ## About
 
 ![Screenshot from Terminal](readme-about-terminal-screenshot.png "The helpful arrow is included!")

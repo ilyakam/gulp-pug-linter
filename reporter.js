@@ -78,6 +78,12 @@ module.exports = function (type) {
   var errors = []
   var reporter = loadReporter(type)
 
+  fancyLog.warn([
+    'DEPRECATION WARNING: `',
+    PLUGIN_NAME,
+    '.reporter()` is removed in version 1.0.0'
+  ].join(''))
+
   return throughObj(function (file, encoding, callback) {
     if (file.pugLinter && file.pugLinter.errors.length) {
       errors = [].concat(errors, file.pugLinter.errors)

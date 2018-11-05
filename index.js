@@ -35,7 +35,7 @@ function gulpPugLinter () {
 
     errors = checkFile(file)
 
-    file.pugLinter = {errors: errors}
+    file.pugLinter = { errors: errors }
 
     return callback(null, file)
   })
