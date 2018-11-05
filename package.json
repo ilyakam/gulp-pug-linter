@@ -11,18 +11,24 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
     "coveralls": "^3.0.2",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.27.1",
     "gulp": "^4.0.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
-    "proxyquire": "^2.0.1",
-    "sinon": "^6.1.4",
-    "standard": "^11.0.1",
+    "jest": "^23.6.0",
     "vinyl": "^2.2.0"
   },
   "engines": {
     "node": ">=4.x"
+  },
+  "greenkeeper": {
+    "commitMessages": {
+      "dependencyUpdate": "chore(package): update ${dependency} to version ${version}\r\n\r\nAutomatically update dependencies with Greenkeeper",
+      "devDependencyUpdate": "chore(package): update ${dependency} to version ${version}\r\n\r\nAutomatically update dev dependencies with Greenkeeper",
+      "lockfileUpdate": "chore(package): update lockfile ${lockfilePath}\r\n\r\nAutomatically update lockfile with Greenkeeper"
+    }
   },
   "homepage": "https://github.com/ilyakam/gulp-pug-linter#readme",
   "keywords": [
@@ -40,12 +46,11 @@
     "url": "git+https://github.com/ilyakam/gulp-pug-linter.git"
   },
   "scripts": {
-    "coverage": "istanbul cover _mocha -- -R spec",
-    "coveralls": "npm run coverage && coveralls < coverage/lcov.info",
+    "coveralls": "npm run test && coveralls < coverage/lcov.info",
     "dev": "gulp",
-    "pretest": "standard",
-    "test": "npm run coveralls",
-    "watch": "mocha --watch || exit 0"
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "jest"
   },
-  "version": "0.7.0"
+  "version": "1.0.0"
 }

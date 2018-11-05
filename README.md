@@ -1,6 +1,6 @@
 # gulp-pug-linter
 
-Gulp plugin to lint Pug (nee Jade) files
+Gulp plugin to lint Jade or Pug files
 
 ## Status
 
@@ -9,76 +9,14 @@ Gulp plugin to lint Pug (nee Jade) files
 [![Coverage Status](https://coveralls.io/repos/github/ilyakam/gulp-pug-linter/badge.svg?branch=develop)](https://coveralls.io/github/ilyakam/gulp-pug-linter?branch=develop)
 [![Dependencies Status](https://david-dm.org/ilyakam/gulp-pug-linter/status.svg)](https://david-dm.org/ilyakam/gulp-pug-linter)
 [![Dev Dependencies Status](https://david-dm.org/ilyakam/gulp-pug-linter/dev-status.svg)](https://david-dm.org/ilyakam/gulp-pug-linter?type=dev)
-[![Code Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ilyakam/gulp-pug-linter.svg)](https://greenkeeper.io/)
-
-## :warning: Warning :warning:
-
-**Breaking API Changes as of version `1.0.0`:**  
-`.reporter()` is being deprecated.
-
-### Migration Guide
-
-#### Built-in Reporter
-
-##### From:
-
-```js
-.pipe(pugLinter())
-.pipe(pugLinter.reporter())
-```
-
-##### To:
-
-```js
-.pipe(pugLinter({ reporter: 'default' }))
-```
-
-#### Break on Error
-
-##### From:
-
-```js
-.pipe(pugLinter())
-.pipe(pugLinter.reporter('fail'))
-```
-
-##### To:
-
-```js
-.pipe(pugLinter({
-  failAfterError: true,
-  reporter: 'default'
-}))
-```
-
-#### Custom Reporter
-
-##### From:
-
-```js
-.pipe(pugLinter())
-.pipe(pugLinter.reporter(myPugLintReporter))
-// OR
-.pipe(pugLinter.reporter('my-pug-lint-reporter'))
-```
-
-##### To:
-
-```js
-.pipe(pugLinter({
-  failAfterError: true,
-  reporter: myPugLintReporter
-  // OR
-  reporter: 'my-pug-lint-reporter'
-}))
-```
 
 ## About
 
 ![Screenshot from Terminal](readme-about-terminal-screenshot.png "The helpful arrow is included!")
 
-A no-frills wrapper for the [`pug-lint`](https://github.com/pugjs/pug-lint/blob/master/README.md) CLI. It expects the same configuration files as does the CLI tool. This means that whether you prefer linting from `.pug-lintrc`, `.pug-lint.json`, directly from `package.json` (`"pugLintConfig": ...`), or even the legacy `.jade` files, this plugin is going to work for you right out of the box. In addition, it can be set to fail once it encounters lint errors. That's important if you care about making the Continuous Integration (CI) builds to fail on error.
+A no-frills wrapper for the [`pug-lint`](https://github.com/pugjs/pug-lint/blob/master/README.md) CLI tool. It expects the same configuration files as the CLI. This means that whether you prefer configuring the linter with `.pug-lintrc`, `.pug-lint.json`, `package.json` (`"pugLintConfig": ...`), or even with the legacy `.jade` files, this plugin is going to work for you right out of the box. In addition, it can be set to fail after it encounters lint errors. That's important if you care about making the Continuous Integration (CI) builds fail after error.
 
 ## Installation
 
@@ -86,85 +24,96 @@ A no-frills wrapper for the [`pug-lint`](https://github.com/pugjs/pug-lint/blob/
 $ npm install gulp-pug-linter --save-dev
 ```
 
+## Options
+
+* `failAfterError` - whether to throw a plugin error after encountering one or more lint errors
+* `reporter` - reporter type, name, module, or function to show lint errors
+
 ## Usage
 
-To see lint errors without breaking the build, simply pipe the Pug source files into `.pugLinter()` and then into the handy, built-in reporter `pugLinter.reporter()`. This is great for watching the `*.pug` files as you're developing them.
+### Basic
+
+To lint the template files without breaking the build, pipe the source files into `pugLinter({ reporter: 'default' })`:
 
 ```js
 // gulpfile.js
-var gulp = require('gulp')
-var pugLinter = require('gulp-pug-linter')
+const gulp = require('gulp');
+const pugLinter = require('gulp-pug-linter');
 
-gulp.task('lint:template', function () {
-  return gulp
+gulp.task('lint:template', () => (
+  gulp
     .src('./**/*.pug')
-    .pipe(pugLinter())
-    .pipe(pugLinter.reporter())
-})
+    .pipe(pugLinter({ reporter: 'default' }))
+));
 ```
 
-To break the build on lint errors, make sure that `pugLinter.reporter` is set to `'fail'`, like so:
+Note that specifying a `reporter` key with an invalid value would fall back to the `'default'` reporter and display a warning. The screenshot above shows the `'default'` reporter in action.
+
+### Fail After Error(s)
+
+If you want to break the build after seeing one or more errors, set the `{ failAfterError: true }` option on `pugLinter()`:
 
 ```js
 // gulpfile.js
-var gulp = require('gulp')
-var pugLinter = require('gulp-pug-linter')
+const gulp = require('gulp');
+const pugLinter = require('gulp-pug-linter');
 
-gulp.task('lint:template', function () {
-  return gulp
+gulp.task('lint:template', () => (
+  gulp
     .src('./**/*.pug')
-    .pipe(pugLinter())
-    .pipe(pugLinter.reporter('fail'))
-})
+    .pipe(pugLinter({ failAfterError: true }))
+));
 ```
 
-Specify external modules as reporters using either the module's
-constructor or the module's name:
+Note that without a `reporter` option, this usage example would break the build without displaying any lint errors. This might be useful in pre-production CI builds or during a `git bisect`.
+
+### External Reporter
+
+If you want to specify an external module as a reporter, you may provide its constructor:
 
 ```js
 // gulpfile.js
-var gulp = require('gulp')
-var pugLinter = require('gulp-pug-linter')
-var myPugLintReporter = require('my-pug-lint-reporter')
+const gulp = require('gulp');
+const pugLinter = require('gulp-pug-linter');
+const pugLintStylish = require('puglint-stylish');
 
-gulp.task('lint:template', function () {
-  return gulp
+gulp.task('lint:template', () => (
+  gulp
     .src('./**/*.pug')
-    .pipe(pugLinter())
-    .pipe(pugLinter.reporter(myPugLintReporter))
-})
+    .pipe(pugLinter({ reporter: pugLintStylish }))
+));
 ```
 
-  _- OR -_
+Or you may provide the module's name:
 
 ```js
 // gulpfile.js
-var gulp = require('gulp')
-var pugLinter = require('gulp-pug-linter')
+const gulp = require('gulp');
+const pugLinter = require('gulp-pug-linter');
 
-gulp.task('lint:template', function () {
-  return gulp
+gulp.task('lint:template', () => (
+  gulp
     .src('./**/*.pug')
-    .pipe(pugLinter())
-    .pipe(pugLinter.reporter('my-pug-lint-reporter'))
-})
+    .pipe(pugLinter({ reporter: 'puglint-stylish' }))
+));
 ```
 
-Specify your own custom reporter:
+### Custom Reporter
+
+You may define a custom reporter:
 
 ```js
 // gulpfile.js
-var gulp = require('gulp')
-var pugLinter = require('gulp-pug-linter')
+const gulp = require('gulp');
+const pugLinter = require('gulp-pug-linter');
 
-var myReporter = function (errors) {
-  if (errors.length) { console.error('It broke!') }
-}
+const myReporter = (errors) => {
+  errors.map(error => console.error(error.message));
+};
 
-gulp.task('lint:template', function () {
-  return gulp
+gulp.task('lint:template', () => (
+  gulp
     .src('./**/*.pug')
-    .pipe(pugLinter())
-    .pipe(pugLinter.reporter(myReporter))
-})
+    .pipe(pugLinter({ reporter: myReporter }))
+));
 ```
