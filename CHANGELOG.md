@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2018-11-07
+### Changed
+- Bump `through2` and `estlint-plugin-jest` packages
+
 ## [1.0.0] - 2018-11-04
 ### Added
 - [BREAKING CHANGE] New API with options to specify a reporter and to exit with errors
