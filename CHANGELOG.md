@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Replace Dependencies Status badge with Tidelift
+
 ## [1.1.0] - 2018-11-07
 ### Changed
 - Bump `through2` and `estlint-plugin-jest` packages
