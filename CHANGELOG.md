@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.2.0] - 2019-06-30
 ### Changed
 - Replace Dependencies Status badge with Tidelift
 - Manually update all dependencies with `npx npm-check-updates -u && npm i`
