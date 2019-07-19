@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Bump the Node.js engine to match the ES2017 syntax in this project
 
+### Security
+- Bump Lodash to version `4.17.15` to address vulnerability with `defaultsDeep`
+
 ## [1.2.0] - 2019-06-30
 ### Changed
 - Replace Dependencies Status badge with Tidelift
