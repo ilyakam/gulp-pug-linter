@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Fixed
+- Bump the Node.js engine to match the ES2017 syntax in this project
+
 ## [1.2.0] - 2019-06-30
 ### Changed
 - Replace Dependencies Status badge with Tidelift
