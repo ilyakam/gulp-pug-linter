@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.2.1] - 2019-07-18
 ### Fixed
 - Bump the Node.js engine to match the ES2017 syntax in this project
 
