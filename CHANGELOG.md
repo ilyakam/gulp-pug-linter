@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.3.0] - 2019-08-24
 ### Changed
 - Bump `eslint-config-airbnb-base` and `eslint-plugin-jest` packages
 - Update `index.js` to comply with new ESLint rules via `eslint . --fix`
