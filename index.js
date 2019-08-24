@@ -54,7 +54,7 @@ const gulpPugLinter = (options = {}) => {
    * @param {String} file.path File path
    * @returns {Array} List of error messages
    */
-  const checkFile = file => linter.checkFile(file.path);
+  const checkFile = (file) => linter.checkFile(file.path);
 
   linter.configure(config);
 
@@ -96,7 +96,7 @@ const report = (errors) => {
   let allErrors;
 
   if (errors.length) {
-    allErrors = errors.map(error => error.message).join('\n\n');
+    allErrors = errors.map((error) => error.message).join('\n\n');
 
     fancyLog(allErrors);
   }
