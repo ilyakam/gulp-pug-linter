@@ -7,7 +7,6 @@ Gulp plugin to lint Jade or Pug files
 [![npm](https://nodei.co/npm/gulp-pug-linter.png)](https://nodei.co/npm/gulp-pug-linter/)  
 [![Codeship Status](https://www.codeship.io/projects/ca7127f0-dd21-0133-5b9a-6a36b574da30/status?branch=develop)](https://www.codeship.io/projects/144282)
 [![Coverage Status](https://coveralls.io/repos/github/ilyakam/gulp-pug-linter/badge.svg?branch=develop)](https://coveralls.io/github/ilyakam/gulp-pug-linter?branch=develop)
-[![Dependencies Status](https://tidelift.com/badges/github/ilyakam/gulp-pug-linter?style=flat)](https://tidelift.com/subscription/pkg/npm-gulp-pug-linter)
 [![Dev Dependencies Status](https://david-dm.org/ilyakam/gulp-pug-linter/dev-status.svg)](https://david-dm.org/ilyakam/gulp-pug-linter?type=dev)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ilyakam/gulp-pug-linter.svg)](https://greenkeeper.io/)
@@ -17,6 +16,12 @@ Gulp plugin to lint Jade or Pug files
 ![Screenshot from Terminal](readme-about-terminal-screenshot.png "The helpful arrow is included!")
 
 A no-frills wrapper for the [`pug-lint`](https://github.com/pugjs/pug-lint/blob/master/README.md) CLI tool. It expects the same configuration files as the CLI. This means that whether you prefer configuring the linter with `.pug-lintrc`, `.pug-lint.json`, `package.json` (`"pugLintConfig": ...`), or even with the legacy `.jade` files, this plugin is going to work for you right out of the box. In addition, it can be set to fail after it encounters lint errors. That's important if you care about making the Continuous Integration (CI) builds fail after error.
+
+## `gulp-pug-linter` for enterprise
+
+Available as part of the Tidelift Subscription.
+
+The maintainers of `gulp-pug-linter` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-gulp-pug-linter?utm_source=npm-gulp-pug-linter&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
 
 ## Installation
 
