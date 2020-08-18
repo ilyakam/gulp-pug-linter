@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.4.0] - 2020-08-18
 ### Changed
 - [BREAKING CHANGE] Require Node.js engine v10 and higher
 - Bump `eslint`, `jest`, and `through2`
