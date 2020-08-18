@@ -231,7 +231,7 @@ describe('gulp-pug-linter', () => {
       });
 
       describe('when no reporters are specified', () => {
-        beforeEach((done) => {
+        test('should warn about fallback to the default reporter', (done) => {
           const gulpPugLinter = require('./index');
 
           stream = gulpPugLinter({ reporter: 'missing reporter' });
@@ -240,21 +240,29 @@ describe('gulp-pug-linter', () => {
 
           stream.write(mockFile);
 
-          stream.end();
-        });
-
-        test('should warn about fallback to the default reporter', () => {
           stream.on('data', () => {
             expect(mockFancyLog.warn)
               .toHaveBeenCalledWith(expect.stringContaining('warning'));
           });
+
+          stream.end();
         });
 
-        test('should fall back to the default reporter', () => {
+        test('should fall back to the default reporter', (done) => {
+          const gulpPugLinter = require('./index');
+
+          stream = gulpPugLinter({ reporter: 'missing reporter' });
+
+          stream.on('finish', done);
+
+          stream.write(mockFile);
+
           stream.on('data', () => {
             expect(mockFancyLog)
               .toHaveBeenCalledWith(expect.stringContaining('some error'));
           });
+
+          stream.end();
         });
       });
     });

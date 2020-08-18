@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- [BREAKING CHANGE] Require Node.js engine v10 and higher
+- Bump `eslint`, `jest`, and `through2`
+
 ## [1.3.0] - 2019-08-24
 ### Changed
 - Bump `eslint-config-airbnb-base` and `eslint-plugin-jest` packages
@@ -73,7 +78,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.4.1] - 2016-10-15
 ### Fixed
 - Ensure unit tests can run in Windows
-- Ensure Node engine is not limited to v5.x
+- Ensure Node.js engine is not limited to v5.x
 
 ## [0.4.0] - 2016-10-09
 ### Added
