@@ -69,7 +69,7 @@ const gulpPugLinter = (options = {}) => {
 
     const errors = checkFile(file);
 
-    if (Object.keys(options).includes('reporter')) {
+    if (errors.length && Object.keys(options).includes('reporter')) {
       getReporter(options.reporter)(errors);
     }
 
