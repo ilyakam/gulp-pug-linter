@@ -133,6 +133,21 @@ describe('gulp-pug-linter', () => {
             .not.toHaveBeenCalled();
         });
       });
+
+      test('should not show any messages on silenceOnSuccess', () => {
+        const gulpPugLinter = require('./index');
+        const mockReporter = jest.fn();
+
+        stream = gulpPugLinter({
+          reporter: mockReporter,
+          silenceOnSuccess: true,
+        });
+
+        stream.on('data', () => {
+          expect(mockReporter)
+            .not.toHaveBeenCalled();
+        });
+      });
     });
 
     describe('when there are some errors', () => {
