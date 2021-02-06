@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.0] - 2021-02-06
+### Added
+- Option to bypass the reporter entirely when there are no errors
+
+### Changed
+- Bump `eslint*`, `jest`, and `vinyl` packages
+
 ## [1.4.0] - 2020-08-18
 ### Changed
 - [BREAKING CHANGE] Require Node.js engine v10 and higher

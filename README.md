@@ -10,7 +10,7 @@ Gulp plugin to lint Jade or Pug files
 [![Dependencies Status](https://david-dm.org/ilyakam/gulp-pug-linter/status.svg)](https://david-dm.org/ilyakam/gulp-pug-linter)
 [![Dev Dependencies Status](https://david-dm.org/ilyakam/gulp-pug-linter/dev-status.svg)](https://david-dm.org/ilyakam/gulp-pug-linter?type=dev)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
-[![Greenkeeper badge](https://badges.greenkeeper.io/ilyakam/gulp-pug-linter.svg)](https://greenkeeper.io/)
+[![Known Vulnerabilities](https://snyk.io/test/github/ilyakam/gulp-pug-linter/badge.svg)](https://snyk.io/test/github/ilyakam/gulp-pug-linter)
 
 ## About
 
@@ -32,8 +32,9 @@ $ npm install gulp-pug-linter --save-dev
 
 ## Options
 
-* `failAfterError` - whether to throw a plugin error after encountering one or more lint errors
-* `reporter` - reporter type, name, module, or function to show lint errors
+* `failAfterError` - whether to throw a plugin error after encountering one or more lint errors (default: `false`)
+* `reporter` - reporter type, name, module, or function to show lint errors (default: `'default'`)
+* `silenceOnSuccess` - whether to bypass the reporter when there are no lint errors (default: `false`)
 
 ## Usage
 
