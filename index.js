@@ -42,6 +42,8 @@ const getReporter = (reporter) => {
  * @param {Boolean} failAfterError Whether to throw a plugin error after
  *                                 encountering one or more lint errors
  * @param {*} reporter Reporter type, name, or function to show lint errors
+ * @param {Boolean} silenceOnSuccess Whether to bypass the reporter when there
+ *                                   are no lint errors
  */
 const gulpPugLinter = (options = {}) => {
   const config = configFile.load();
@@ -69,11 +71,17 @@ const gulpPugLinter = (options = {}) => {
 
     const errors = checkFile(file);
 
+    const hasErrors = errors.length > 0;
+
     if (Object.keys(options).includes('reporter')) {
-      getReporter(options.reporter)(errors);
+      const reporter = getReporter(options.reporter);
+
+      if (hasErrors || !options.silenceOnSuccess) {
+        reporter(errors);
+      }
     }
 
-    if (options.failAfterError && errors.length) {
+    if (options.failAfterError && hasErrors) {
       this.emit('error', new PluginError(PLUGIN_NAME, 'Lint failed'));
     }
 

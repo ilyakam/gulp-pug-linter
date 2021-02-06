@@ -32,8 +32,9 @@ $ npm install gulp-pug-linter --save-dev
 
 ## Options
 
-* `failAfterError` - whether to throw a plugin error after encountering one or more lint errors
-* `reporter` - reporter type, name, module, or function to show lint errors
+* `failAfterError` - whether to throw a plugin error after encountering one or more lint errors (default: `false`)
+* `reporter` - reporter type, name, module, or function to show lint errors (default: `'default'`)
+* `silenceOnSuccess` - whether to bypass the reporter when there are no lint errors (default: `false`)
 
 ## Usage
 
